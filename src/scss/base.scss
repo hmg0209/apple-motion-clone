@@ -1,0 +1,278 @@
+@charset 'utf-8';
+@import '~sass-mq';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap');
+
+//color
+$text-color: rgb(29, 29, 31);
+$text-color-light: #888;
+$gray: #ddd;
+$white: #fff;
+
+$mq-breakpoints: (
+  small: 360px,
+  medium: 740px,
+  large: 1024px,
+);
+
+html {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  // overflow-x: hidden;
+  color: $text-color;
+  font-size: 1.6rem;
+  letter-spacing: -0.05em;
+  background: $white;
+}
+
+p {
+  line-height: 1.6;
+}
+
+a {
+  display: inline-block;
+  color: $text-color;
+  text-decoration: none;
+}
+
+.l-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 1rem;
+  margin: auto;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.header {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  border-bottom: 1px solid $gray;
+}
+
+.gnb {
+  height: 44px;
+
+  &__links,
+  &__item,
+  &__a {
+    height: 100%;
+  }
+
+  &__links {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__a {
+    display: flex;
+    align-items: center;
+    // padding: 0 2em;
+  }
+}
+
+.lnb {
+  display: flex;
+  justify-content: space-between;
+  height: 52px;
+
+  &__logo {
+    align-self: center;
+    padding: 0.7em 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    & + & {
+      margin-left: 2em;
+    }
+  }
+
+  &__a {
+    padding: 1.35em 0;
+    font-size: 1.3rem;
+  }
+}
+
+//font-size
+.h1,
+.h2,
+.h3,
+.h4 {
+  font-weight: bold;
+  line-height: 1.2;
+}
+//126, 56
+.h1 {
+  font-size: calc(7.1vw + 30.45px);
+  font-weight: bold;
+}
+.h2 {
+  font-size: 3.5rem;
+}
+// 64, 35
+.h3 {
+  font-size: calc(2.34vw + 26.58px);
+}
+//57, 28
+.h4 {
+  font-size: calc(2.79vw + 17.96px);
+}
+
+em {
+  color: $text-color;
+  font-weight: 900;
+}
+
+// scene
+.page__title {
+  transform: translateY(-10vh);
+  text-align: center;
+}
+
+.scene {
+  box-sizing: border-box;
+  padding-top: 50vh;
+
+  &__title {
+    &--gray {
+      color: $text-color-light;
+      font-weight: normal;
+    }
+
+    &-box {
+      top: 35vh;
+      text-align: center;
+      margin: 5px 0;
+    }
+
+    &-brow {
+      display: block;
+      margin-bottom: 0.5em;
+      font-size: calc(0.63vw + 11.75px);
+    }
+  }
+
+  &__desc {
+    color: $text-color-light;
+    font-size: 1.6rem;
+    line-height: 1.6;
+
+    &-em {
+      float: left;
+      margin-right: 0.5em;
+    }
+  }
+
+  &__pin {
+    display: block;
+    width: 1px;
+    height: 100px;
+    background-color: $text-color;
+
+    &-box {
+      &:nth-of-type(1) {
+        top: 10%;
+        left: 40%;
+      }
+      &:nth-of-type(2) {
+        top: 15%;
+        left: 45%;
+      }
+    }
+
+    &-desc {
+      font-weight: bold;
+      width: 50%;
+      max-width: 300px;
+    }
+  }
+
+  &--3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.item__sticky {
+  position: fixed;
+  width: 100%;
+  display: none;
+
+  .scene--now & {
+    display: block;
+  }
+
+  &--text {
+    opacity: 0;
+  }
+
+  &--canvas {
+    top: 0;
+    z-index: -1;
+    height: 100vh;
+
+    & > canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+}
+
+#img-blend-canvas {
+  box-sizing: border-box;
+  background: $text-color-light;
+}
+
+//footer
+.footer {
+  padding: 2rem 0;
+  color: $white;
+  text-align: center;
+  background-color: darkorange;
+}
+
+@include mq(large) {
+  .l-wrap {
+    .h4 {
+      font-size: 6.8rem;
+      line-height: 1.6;
+    }
+  }
+
+  .h2 {
+    font-size: 8.4rem;
+  }
+
+  .scene {
+    &__desc {
+      font-size: 2.4rem;
+    }
+
+    &__pin {
+      &-box {
+        &:nth-child(1) {
+          top: 20%;
+          left: 53%;
+        }
+        &:nth-child(2) {
+          left: 55%;
+        }
+      }
+    }
+  }
+}
