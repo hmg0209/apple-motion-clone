@@ -20,7 +20,6 @@ html {
 }
 
 body {
-  // overflow-x: hidden;
   color: $text-color;
   font-size: 1.6rem;
   letter-spacing: -0.05em;
@@ -42,11 +41,15 @@ a {
   width: 100%;
   max-width: 1000px;
   padding: 0 1rem;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .container {
   overflow: hidden;
+
+  .before-load & {
+    display: none;
+  }
 }
 
 .header {
@@ -54,10 +57,21 @@ a {
   z-index: 10;
   width: 100%;
   border-bottom: 1px solid $gray;
+
+  &--sticky {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: saturate(180%) blur(15px);
+    -webkit-backdrop-filter: saturate(180%) blur(15px);
+  }
 }
 
 .gnb {
   height: 44px;
+
+  .header--sticky & {
+    display: none;
+  }
 
   &__links,
   &__item,
@@ -143,6 +157,7 @@ em {
 }
 
 .scene {
+  position: relative;
   box-sizing: border-box;
   padding-top: 50vh;
 
@@ -214,6 +229,7 @@ em {
 
   .scene--now & {
     display: block;
+    will-change:  transform, opacity;
   }
 
   &--text {
@@ -234,7 +250,10 @@ em {
 }
 
 #img-blend-canvas {
+  top: 0;
   box-sizing: border-box;
+  width: auto;
+  margin-bottom: -37rem;
   background: $text-color-light;
 }
 
@@ -246,8 +265,57 @@ em {
   background-color: darkorange;
 }
 
+.before-load {
+  overflow: hidden;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+  opacity: 0;
+  transition: opacity 0.5s;
+
+  .before-load & {
+    opacity: 1;
+  }
+
+  &-circle {
+    width: 54px;
+    height: 54px;
+    animation: loading-spin 3s infinite;
+
+    circle {
+      stroke: $text-color;
+      stroke-width: 4;
+      stroke-dasharray: 157;
+      stroke-dashoffset: -157;
+      fill: transparent;
+      animation: loading-circle-ani 1s infinite;
+    }
+  }
+}
+
+@keyframes loading-circle-ani {
+  0% { stroke-dashoffset: 157; }
+  75% { stroke-dashoffset: -147; }
+  100% { stroke-dashoffset: -157; }
+}
+@keyframes loading-spin {
+  100% { transform: rotate(360deg);}
+}
+
 @include mq(large) {
   .l-wrap {
+    padding: 0;
+
     .h4 {
       font-size: 6.8rem;
       line-height: 1.6;
@@ -274,5 +342,9 @@ em {
         }
       }
     }
+  }
+
+  #img-blend-canvas {
+    margin-bottom: -8rem;
   }
 }
